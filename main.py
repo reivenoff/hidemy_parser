@@ -6,7 +6,8 @@ from colorama import init, Fore
 from random import choice, randint
 
 init(convert=True)
-info = '[' + Fore.BLUE + 'INFO' + Fore.WHITE + ']'
+info = '[' + Fore.LIGHTGREEN_EX + 'INFO' + Fore.WHITE + ']'
+question = '[' + Fore.LIGHTBLUE_EX + 'QUESTION' + Fore.WHITE + ']'
 logo = Fore.GREEN + r"""
 .   .--.--.--. .---..    .   .  .--.  .    .--. .-..---..--.
 |   |  |  |   :|    |\  /|\ /   |   )/ \   |   |   )    |   )
@@ -39,7 +40,7 @@ class Parsing():
         links_new = []
         for link in links:
             try:
-                links_new.append('http://hidemy.name'+str(link).split('href="')[1].split('">')[0])
+                links_new.append('http://hidemy.name'+str(link).split('href="')[1].split('">')[0].replace("amp;", ""))
             except: pass # Если <li class="dots">. . .</li>
         return links_new
 
@@ -55,15 +56,13 @@ class Parsing():
                 ip = str(block).split('<td>')[1].split('</')[0]
                 port = str(block).split('</td><td>')[1]
                 f.write(f'{ip}:{port}\n')
-                # print(f'{ip}:{port}')
+                print(f'{ip}:{port}')
             except: pass
         del soup
         f.close()
 
 
 if __name__ == '__main__':
-    print(logo)
-
     type  = 'type='
     types = {
     'http':   {'h': None},
@@ -73,9 +72,10 @@ if __name__ == '__main__':
 
     protocols = list(types.keys())
     while None in [list(types.get(protocol).values())[0] for protocol in protocols]:
+        print(logo)
         for protocol in protocols:
             if list(types.get(protocol).values())[0] == None:
-                answer = input(f'Получать прокси {protocol} Y/n: ')
+                answer = input(f'{question} Получать прокси {protocol} Y/n: ')
                 if answer.lower() == 'y':
                     answer = True
                 elif answer.lower() == 'n':
