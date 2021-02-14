@@ -5,6 +5,12 @@ from bs4 import BeautifulSoup
 from colorama import init, Fore
 from random import choice, randint
 
+__title__ = 'HideMy_Parser_2021'
+__version__ = '1.0.0'
+__author__ = 'reiven'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2021 by Me'
+
 init(convert=True)
 info = '[' + Fore.LIGHTGREEN_EX + 'INFO' + Fore.WHITE + ']'
 question = '[' + Fore.LIGHTBLUE_EX + 'QUESTION' + Fore.WHITE + ']'
